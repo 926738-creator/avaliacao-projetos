@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Disciplina - Elaboração e Gestão de Projetos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a4a 0%, #2c3e50 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a2a4a 0%, #2c3e50 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .instruction {
+            background: #f0f4f8;
+            border-left: 4px solid #1a2a4a;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .instruction strong {
+            color: #1a2a4a;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a2a4a;
+            margin-bottom: 5px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .section-description {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .question-group {
+            margin-bottom: 30px;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .question-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .likert-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .likert-option {
+            flex: 0 1 calc(20% - 8px);
+            min-width: 80px;
+        }
+
+        .likert-option input[type="radio"] {
+            display: none;
+        }
+
+        .likert-option label {
+            display: block;
+            text-align: center;
+            padding: 12px 10px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .likert-option input[type="radio"]:checked + label {
+            background: #1a2a4a;
+            color: white;
+            border-color: #1a2a4a;
+            transform: scale(1.05);
+        }
+
+        .likert-option label:hover {
+            border-color: #1a2a4a;
+            background: #f5f5f5;
+        }
+
+        .likert-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+            padding: 0 5px;
+        }
+
+        .open-question {
+            margin-bottom: 30px;
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .open-question-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .open-question textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .open-question textarea:focus {
+            outline: none;
+            border-color: #1a2a4a;
+            box-shadow: 0 0 0 3px rgba(26, 42, 74, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: center;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit {
+            background: #1a2a4a;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #0f1b2f;
+            box-shadow: 0 4px 15px rgba(26, 42, 74, 0.3);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-reset:hover {
+            background: #d0d0d0;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 20px 30px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .message {
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .loading-message {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .likert-option {
+                flex: 0 1 calc(25% - 8px);
+                min-width: 70px;
+            }
+
+            .likert-option label {
+                padding: 10px 8px;
+                font-size: 11px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Avaliação da Disciplina</h1>
+            <p><strong>Elaboração e Gestão de Projetos</strong></p>
+            <p>Turma: 4º CFO | 30 horas</p>
+            <div class="subtitle">
+                Sua opinião é valiosa! Ajude-nos a melhorar esta disciplina respondendo este questionário com sinceridade.
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="message success-message" id="successMessage">
+                ✓ Obrigado! Sua avaliação foi registrada com sucesso. Os dados foram salvos na planilha do professor.
+            </div>
+
+            <div class="message error-message" id="errorMessage">
+                ✗ Erro ao enviar! Verifique sua conexão de internet e tente novamente.
+            </div>
+
+            <div class="message loading-message" id="loadingMessage">
+                <span class="spinner"></span> Enviando sua avaliação...
+            </div>
+
+            <div class="instruction">
+                <strong>Instruções:</strong><br>
+                Por favor, avalie cada aspecto da disciplina utilizando a escala fornecida. Suas respostas são anônimas e confidenciais. 
+                Na escala: <strong>1 = Discordo totalmente | 5 = Concordo totalmente</strong>. As questões abertas são oportunidades para suas sugestões e comentários.
+            </div>
+
+            <form id="avaliacaoForm">
+
+                <!-- SEÇÃO 1: CONTEÚDO MINISTRADO -->
+                <div class="section">
+                    <div class="section-title">1. CONTEÚDO MINISTRADO</div>
+                    <div class="section-description">Avalie a qualidade e relevância do conteúdo apresentado</div>
+
+                    <div class="question-group">
+                        <div class="question-text">Os conceitos fundamentais de gerenciamento de projetos foram apresentados de forma clara e compreensível.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q1_conceitos_fundamentais_claros" value="1" id="q1_1">
+                                <label for="q1_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q1_conceitos_fundamentais_claros" value="2" id="q1_2">
+                                <label for="q1_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q1_conceitos_fundamentais_claros" value="3" id="q1_3">
+                                <label for="q1_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q1_conceitos_fundamentais_claros" value="4" id="q1_4">
+                                <label for="q1_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q1_conceitos_fundamentais_claros" value="5" id="q1_5">
+                                <label for="q1_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">O conteúdo foi relevante para minha atuação na Polícia Militar / contexto de projetos PMSC.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q2_relevancia_pmsc" value="1" id="q2_1">
+                                <label for="q2_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q2_relevancia_pmsc" value="2" id="q2_2">
+                                <label for="q2_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q2_relevancia_pmsc" value="3" id="q2_3">
+                                <label for="q2_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q2_relevancia_pmsc" value="4" id="q2_4">
+                                <label for="q2_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q2_relevancia_pmsc" value="5" id="q2_5">
+                                <label for="q2_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Os exemplos práticos utilizados (casos PMSC, projetos FESP, etc.) facilitaram a compreensão dos conceitos.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q3_exemplos_praticos" value="1" id="q3_1">
+                                <label for="q3_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q3_exemplos_praticos" value="2" id="q3_2">
+                                <label for="q3_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q3_exemplos_praticos" value="3" id="q3_3">
+                                <label for="q3_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q3_exemplos_praticos" value="4" id="q3_4">
+                                <label for="q3_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q3_exemplos_praticos" value="5" id="q3_5">
+                                <label for="q3_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">O equilíbrio entre teoria (conceitos) e prática (ferramentas, canvas, PGP) foi apropriado.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q4_equilibrio_teoria_pratica" value="1" id="q4_1">
+                                <label for="q4_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q4_equilibrio_teoria_pratica" value="2" id="q4_2">
+                                <label for="q4_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q4_equilibrio_teoria_pratica" value="3" id="q4_3">
+                                <label for="q4_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q4_equilibrio_teoria_pratica" value="4" id="q4_4">
+                                <label for="q4_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q4_equilibrio_teoria_pratica" value="5" id="q4_5">
+                                <label for="q4_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Quais tópicos ou áreas você gostaria que tivessem maior profundidade?</div>
+                        <textarea name="feedback_conteudo_profundidade" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 2: DIDÁTICA E METODOLOGIA -->
+                <div class="section">
+                    <div class="section-title">2. DIDÁTICA E METODOLOGIA</div>
+                    <div class="section-description">Avalie a forma como o conteúdo foi transmitido</div>
+
+                    <div class="question-group">
+                        <div class="question-text">A apresentação do conteúdo foi clara, organizada e bem estruturada.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q5_apresentacao_clara" value="1" id="q5_1">
+                                <label for="q5_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q5_apresentacao_clara" value="2" id="q5_2">
+                                <label for="q5_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q5_apresentacao_clara" value="3" id="q5_3">
+                                <label for="q5_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q5_apresentacao_clara" value="4" id="q5_4">
+                                <label for="q5_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q5_apresentacao_clara" value="5" id="q5_5">
+                                <label for="q5_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">O ritmo das aulas foi apropriado (nem muito rápido, nem muito lento).</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q6_ritmo_aulas" value="1" id="q6_1">
+                                <label for="q6_1">1<br>Muito<br>Rápido</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q6_ritmo_aulas" value="2" id="q6_2">
+                                <label for="q6_2">2<br>Rápido</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q6_ritmo_aulas" value="3" id="q6_3">
+                                <label for="q6_3">3<br>Apropriado</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q6_ritmo_aulas" value="4" id="q6_4">
+                                <label for="q6_4">4<br>Lento</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q6_ritmo_aulas" value="5" id="q6_5">
+                                <label for="q6_5">5<br>Muito<br>Lento</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">O instrutor demonstrou domínio do conteúdo e disponibilidade para esclarecer dúvidas.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q7_dominio_instrutor" value="1" id="q7_1">
+                                <label for="q7_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q7_dominio_instrutor" value="2" id="q7_2">
+                                <label for="q7_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q7_dominio_instrutor" value="3" id="q7_3">
+                                <label for="q7_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q7_dominio_instrutor" value="4" id="q7_4">
+                                <label for="q7_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q7_dominio_instrutor" value="5" id="q7_5">
+                                <label for="q7_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">As dinâmicas, discussões em grupo e atividades práticas (se houve) foram efetivas para a aprendizagem.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q8_dinamicas_efetivas" value="1" id="q8_1">
+                                <label for="q8_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q8_dinamicas_efetivas" value="2" id="q8_2">
+                                <label for="q8_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q8_dinamicas_efetivas" value="3" id="q8_3">
+                                <label for="q8_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q8_dinamicas_efetivas" value="4" id="q8_4">
+                                <label for="q8_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q8_dinamicas_efetivas" value="5" id="q8_5">
+                                <label for="q8_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Como você sugere melhorar a metodologia e as dinâmicas de aula?</div>
+                        <textarea name="feedback_didatica_metodologia" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 3: MATERIAIS DE APOIO -->
+                <div class="section">
+                    <div class="section-title">3. MATERIAIS DE APOIO E APRESENTAÇÃO</div>
+                    <div class="section-description">Avalie a qualidade dos materiais disponibilizados</div>
+
+                    <div class="question-group">
+                        <div class="question-text">As apresentações (slides) foram de qualidade, visualmente claras e bem organizadas.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q9_slides_qualidade" value="1" id="q9_1">
+                                <label for="q9_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q9_slides_qualidade" value="2" id="q9_2">
+                                <label for="q9_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q9_slides_qualidade" value="3" id="q9_3">
+                                <label for="q9_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q9_slides_qualidade" value="4" id="q9_4">
+                                <label for="q9_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q9_slides_qualidade" value="5" id="q9_5">
+                                <label for="q9_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Os modelos disponibilizados (Project Model Canvas, Plano de Gerenciamento de Projeto) foram suficientes e bem apresentados.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q10_modelos_suficientes" value="1" id="q10_1">
+                                <label for="q10_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q10_modelos_suficientes" value="2" id="q10_2">
+                                <label for="q10_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q10_modelos_suficientes" value="3" id="q10_3">
+                                <label for="q10_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q10_modelos_suficientes" value="4" id="q10_4">
+                                <label for="q10_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q10_modelos_suficientes" value="5" id="q10_5">
+                                <label for="q10_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Os materiais foram disponibilizados em tempo oportuno e de fácil acesso.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q11_materiais_acesso_oportuno" value="1" id="q11_1">
+                                <label for="q11_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q11_materiais_acesso_oportuno" value="2" id="q11_2">
+                                <label for="q11_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q11_materiais_acesso_oportuno" value="3" id="q11_3">
+                                <label for="q11_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q11_materiais_acesso_oportuno" value="4" id="q11_4">
+                                <label for="q11_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q11_materiais_acesso_oportuno" value="5" id="q11_5">
+                                <label for="q11_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Quais materiais adicionais você gostaria de ter recebido (textos, vídeos, templates, guias, etc.)?</div>
+                        <textarea name="feedback_materiais_adicionais" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 4: CARGA HORÁRIA -->
+                <div class="section">
+                    <div class="section-title">4. CARGA HORÁRIA</div>
+                    <div class="section-description">Avalie a adequação do tempo dedicado à disciplina</div>
+
+                    <div class="question-group">
+                        <div class="question-text">A carga horária de 30 horas foi adequada para cobrir todos os conteúdos previstos.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q12_carga_horaria_adequada" value="1" id="q12_1">
+                                <label for="q12_1">1<br>Insuficiente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q12_carga_horaria_adequada" value="2" id="q12_2">
+                                <label for="q12_2">2<br>Pouco<br>Adequada</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q12_carga_horaria_adequada" value="3" id="q12_3">
+                                <label for="q12_3">3<br>Adequada</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q12_carga_horaria_adequada" value="4" id="q12_4">
+                                <label for="q12_4">4<br>Mais que<br>Adequada</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q12_carga_horaria_adequada" value="5" id="q12_5">
+                                <label for="q12_5">5<br>Excessiva</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">A distribuição das horas entre os diferentes tópicos foi bem equilibrada.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q13_distribuicao_horas_equilibrada" value="1" id="q13_1">
+                                <label for="q13_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q13_distribuicao_horas_equilibrada" value="2" id="q13_2">
+                                <label for="q13_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q13_distribuicao_horas_equilibrada" value="3" id="q13_3">
+                                <label for="q13_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q13_distribuicao_horas_equilibrada" value="4" id="q13_4">
+                                <label for="q13_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q13_distribuicao_horas_equilibrada" value="5" id="q13_5">
+                                <label for="q13_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Se necessário, em quais tópicos você sentiria falta de mais tempo? Ou quais tópicos poderiam ter menos horas?</div>
+                        <textarea name="feedback_cargahoraria_distribuicao" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 5: SISTEMA DE AVALIAÇÃO -->
+                <div class="section">
+                    <div class="section-title">5. SISTEMA DE AVALIAÇÃO</div>
+                    <div class="section-description">Avalie a clareza e justeza dos critérios de avaliação</div>
+
+                    <div class="question-group">
+                        <div class="question-text">Os critérios de avaliação (PMC individual + Projeto em dupla) foram claramente explicados no início da disciplina.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q14_criterios_avaliacao_claros" value="1" id="q14_1">
+                                <label for="q14_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q14_criterios_avaliacao_claros" value="2" id="q14_2">
+                                <label for="q14_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q14_criterios_avaliacao_claros" value="3" id="q14_3">
+                                <label for="q14_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q14_criterios_avaliacao_claros" value="4" id="q14_4">
+                                <label for="q14_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q14_criterios_avaliacao_claros" value="5" id="q14_5">
+                                <label for="q14_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Os critérios de avaliação foram justos e alinhados com os objetivos e conteúdos da disciplina.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q15_criterios_avaliacao_justos" value="1" id="q15_1">
+                                <label for="q15_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q15_criterios_avaliacao_justos" value="2" id="q15_2">
+                                <label for="q15_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q15_criterios_avaliacao_justos" value="3" id="q15_3">
+                                <label for="q15_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q15_criterios_avaliacao_justos" value="4" id="q15_4">
+                                <label for="q15_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q15_criterios_avaliacao_justos" value="5" id="q15_5">
+                                <label for="q15_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Recebi retroalimentação clara sobre meu desempenho (feedback das avaliações).</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q16_feedback_recebido" value="1" id="q16_1">
+                                <label for="q16_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q16_feedback_recebido" value="2" id="q16_2">
+                                <label for="q16_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q16_feedback_recebido" value="3" id="q16_3">
+                                <label for="q16_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q16_feedback_recebido" value="4" id="q16_4">
+                                <label for="q16_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q16_feedback_recebido" value="5" id="q16_5">
+                                <label for="q16_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Você teria sugestões para melhorar o sistema de avaliação?</div>
+                        <textarea name="feedback_avaliacao_sugestoes" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 6: GANHOS PROFISSIONAIS E APRENDIZADO -->
+                <div class="section">
+                    <div class="section-title">6. GANHOS PROFISSIONAIS E APRENDIZADO</div>
+                    <div class="section-description">Avalie o impacto na sua aprendizagem e desenvolvimento profissional</div>
+
+                    <div class="question-group">
+                        <div class="question-text">Esta disciplina ampliou meus conhecimentos em gerenciamento de projetos.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q17_ampliou_conhecimentos" value="1" id="q17_1">
+                                <label for="q17_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q17_ampliou_conhecimentos" value="2" id="q17_2">
+                                <label for="q17_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q17_ampliou_conhecimentos" value="3" id="q17_3">
+                                <label for="q17_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q17_ampliou_conhecimentos" value="4" id="q17_4">
+                                <label for="q17_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q17_ampliou_conhecimentos" value="5" id="q17_5">
+                                <label for="q17_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Sinto-me mais capacitado(a) para elaborar e gerenciar projetos na PMSC após esta disciplina.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q18_capacitado_para_projetos" value="1" id="q18_1">
+                                <label for="q18_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q18_capacitado_para_projetos" value="2" id="q18_2">
+                                <label for="q18_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q18_capacitado_para_projetos" value="3" id="q18_3">
+                                <label for="q18_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q18_capacitado_para_projetos" value="4" id="q18_4">
+                                <label for="q18_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q18_capacitado_para_projetos" value="5" id="q18_5">
+                                <label for="q18_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">Tenho confiança em aplicar as ferramentas e metodologias aprendidas (PMC, PGP, conceitos de gestão) em projetos reais.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q19_confianca_ferramentas" value="1" id="q19_1">
+                                <label for="q19_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q19_confianca_ferramentas" value="2" id="q19_2">
+                                <label for="q19_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q19_confianca_ferramentas" value="3" id="q19_3">
+                                <label for="q19_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q19_confianca_ferramentas" value="4" id="q19_4">
+                                <label for="q19_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q19_confianca_ferramentas" value="5" id="q19_5">
+                                <label for="q19_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Como você pretende aplicar os conhecimentos adquiridos em sua carreira na PM?</div>
+                        <textarea name="feedback_aplicacao_conhecimentos" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 7: INFRAESTRUTURA E RECURSOS -->
+                <div class="section">
+                    <div class="section-title">7. INFRAESTRUTURA E RECURSOS</div>
+                    <div class="section-description">Avalie as condições de sala, equipamentos e acesso a recursos</div>
+
+                    <div class="question-group">
+                        <div class="question-text">A sala de aula e os equipamentos disponíveis (projetor, quadro, internet) foram adequados.</div>
+                        <div class="likert-options">
+                            <div class="likert-option">
+                                <input type="radio" name="q20_infraestrutura_adequada" value="1" id="q20_1">
+                                <label for="q20_1">1<br>Discordo<br>Totalmente</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q20_infraestrutura_adequada" value="2" id="q20_2">
+                                <label for="q20_2">2<br>Discordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q20_infraestrutura_adequada" value="3" id="q20_3">
+                                <label for="q20_3">3<br>Neutro</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q20_infraestrutura_adequada" value="4" id="q20_4">
+                                <label for="q20_4">4<br>Concordo</label>
+                            </div>
+                            <div class="likert-option">
+                                <input type="radio" name="q20_infraestrutura_adequada" value="5" id="q20_5">
+                                <label for="q20_5">5<br>Concordo<br>Totalmente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Houve problemas com infraestrutura ou acesso a recursos? Como melhorar?</div>
+                        <textarea name="feedback_infraestrutura_problemas" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO 8: RECOMENDAÇÕES GERAIS -->
+                <div class="section">
+                    <div class="section-title">8. RECOMENDAÇÕES E COMENTÁRIOS GERAIS</div>
+                    <div class="section-description">Espaço aberto para suas sugestões de melhoria</div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Qual foi o melhor aspecto desta disciplina? O que você mais apreciou?</div>
+                        <textarea name="feedback_melhor_aspecto" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Quais foram as maiores dificuldades ou pontos negativos da disciplina?</div>
+                        <textarea name="feedback_dificuldades" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Deixe suas recomendações e sugestões para a próxima edição da disciplina:</div>
+                        <textarea name="feedback_recomendacoes" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+
+                    <div class="open-question">
+                        <div class="open-question-text">Comentários adicionais ou observações:</div>
+                        <textarea name="feedback_comentarios_adicionais" placeholder="Sua resposta aqui..."></textarea>
+                    </div>
+                </div>
+
+                <!-- BOTÕES -->
+                <div class="buttons">
+                    <button type="submit" class="btn btn-submit" id="submitBtn">✓ Enviar Avaliação</button>
+                    <button type="reset" class="btn btn-reset">↺ Limpar</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="footer">
+            <p><strong>Disciplina:</strong> Elaboração e Gestão de Projetos | <strong>Turma:</strong> 4º CFO | <strong>Instrutor:</strong> Ten Cel Rafael Kadletz</p>
+            <p>Suas respostas são anônimas e confidenciais. Obrigado por sua contribuição!</p>
+        </div>
+    </div>
+
+    <script>
+        // Configurações do Google Sheets
+        const GOOGLE_SHEETS_API_KEY = 'AIzaSyBPLym2lezGShaqNJFMRnuTMVTccueTBu4';
+        const SHEET_ID = '1Ep-hcA61dXDmQpNi6x8FwMJOVEa1lAT_jcmZbs7Uako';
+        const SHEET_NAME = 'Respostas';
+
+        const form = document.getElementById('avaliacaoForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Função para obter timestamp
+        function getTimestamp() {
+            const now = new Date();
+            return now.toLocaleString('pt-BR', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit'
+            });
+        }
+
+        // Função para enviar dados ao Google Sheets
+        async function enviarParaPlanilha(dados) {
+            try {
+                // Preparar valores para envio
+                const valores = [
+                    Object.values(dados)
+                ];
+
+                // Fazer requisição à Google Sheets API
+                const response = await fetch(
+                    `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}!A:AG:append?key=${GOOGLE_SHEETS_API_KEY}&valueInputOption=USER_ENTERED`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            values: valores
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return { success: true, data: result };
+
+            } catch (error) {
+                console.error('Erro ao enviar para Google Sheets:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Manipulador do formulário
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Desabilitar botão
+            submitBtn.disabled = true;
+            loadingMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            // Coletar dados do formulário
+            const formData = new FormData(form);
+            const respostas = Object.fromEntries(formData);
+
+            // Adicionar timestamp
+            respostas.timestamp = getTimestamp();
+            respostas.anonimo = 'Sim'; // Anônimo por padrão
+
+            // Enviar para Google Sheets
+            const resultado = await enviarParaPlanilha(respostas);
+
+            // Esconder mensagem de loading
+            loadingMessage.style.display = 'none';
+
+            if (resultado.success) {
+                // Mostrar sucesso
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                // Resetar formulário e reabilitar botão após 3 segundos
+                setTimeout(() => {
+                    form.reset();
+                    submitBtn.disabled = false;
+                    successMessage.style.display = 'none';
+                }, 3000);
+
+            } else {
+                // Mostrar erro
+                errorMessage.style.display = 'block';
+                errorMessage.innerHTML = `✗ Erro ao enviar! ${resultado.error} Verifique sua conexão de internet e tente novamente.`;
+                errorMessage.scrollIntoView({ behavior: 'smooth' });
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Log de inicialização
+        console.log('✓ Formulário de Avaliação carregado com sucesso.');
+        console.log('Sheet ID:', SHEET_ID);
+        console.log('API Key registrada:', GOOGLE_SHEETS_API_KEY.substring(0, 20) + '...');
+    </script>
+</body>
+</html>
